@@ -1,5 +1,12 @@
 return {
   {
+    "jose-elias-alvarez/null-ls.nvim",
+    ft = "go",
+    opts = function ()
+      return require("configs.null-ls")
+    end
+  },
+  {
     "stevearc/conform.nvim",
     event = 'BufWritePre', -- uncomment for format on save
     config = function()
@@ -53,10 +60,49 @@ return {
 
   {
     "mfussenegger/nvim-dap",
-    lazy = true,
-    config = function()
-      local dap = require "nvim-dap"
-      dap.setup()
+  },
+  {
+    "jay-babu/mason-nvim-dap.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "williamboman/mason.nvim",
+      "mfussenegger/nvim-dap",
+    },
+    opts = {
+      handlers = {},
+      ensure_installed = {
+        "dlv",
+        "codelldb"
+      },
+    }
+  },
+  -- {
+  --   "rcarriga/nvim-dap-ui",
+  --   dependencies = "mfussenegger/nvim-dap",
+  --   event = "VeryLazy",
+  --   config = function()
+  --     local dap = require("dap")
+  --     local dapui = require("dapui")
+  --     dapui.setup()
+  --     dap.listeners.after.event_initialized["dapui_config"] = function()
+  --       dapui.open()
+  --     end
+  --     dap.listeners.before.event_terminated["dapui_config"] = function()
+  --       dapui.close()
+  --     end
+  --     dap.listeners.before.event_exited["dapui_config"] = function()
+  --       dapui.close()
+  --     end
+  --   end,
+  -- },
+  {
+    "olexsmir/gopher.nvim",
+    ft = "go",
+    config = function (_, opts)
+      require("gopher").setup(opts)
+    end,
+    build = function()
+      vim.cmd [[silent! GoInstallDeps]]
     end,
   },
 
@@ -114,7 +160,8 @@ return {
       ensure_installed = {
         "lua-language-server", "stylua",
         "html-lsp", "css-lsp", "prettier",
-        "terraform-ls", "gopls"
+        "terraform-ls", "gopls", "clangd", "clang-format",
+        "codelldb"
       },
     },
   },

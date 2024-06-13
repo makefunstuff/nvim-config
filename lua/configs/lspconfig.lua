@@ -22,12 +22,22 @@ lspconfig.tsserver.setup {
   capabilities = capabilities,
 }
 
+lspconfig.clangd.setup {
+  on_attach = on_attach,
+  on_init = on_init,
+  capabilities = capabilities,
+}
+
 
 lspconfig.gopls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
+  rootdir = lspconfig.util.root_pattern("go.mod", ".git", "go.work"),
+  fyletypes = { "go", "gomod", "tmpl" },
   settings = {
     gopls = {
+      usePlaceholders = true,
+      completeUnimported = true,
       gofumpt = true,
       staticcheck = true,
       analyses = {
