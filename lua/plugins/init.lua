@@ -1,14 +1,26 @@
 return {
   {
     "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
+    event = 'BufWritePre', -- uncomment for format on save
     config = function()
       require "configs.conform"
     end,
   },
 
   {
+    "tpope/vim-fugitive",
+    event = "BufReadPost",
+    config = function()
+    end,
+  },
+
+  {
     "mfussenegger/nvim-dap",
+    lazy = true,
+    config = function()
+      local dap = require "nvim-dap"
+      dap.setup()
+    end,
   },
 
   {

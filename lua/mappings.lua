@@ -11,3 +11,6 @@ map("i", "jk", "<ESC>")
 
 map("n", "<leader>tt", "<cmd>Telescope<CR>", { desc = "Open Telescope" })
 map("n", "<leader>tg", "<cmd>Telescope git_files<CR>", { desc = "Telescope git files search" })
+
+-- add ctrl + shift + p to open Telescope
+map("n", "<C-S-P>", "<cmd>Telescope<CR>", { desc = "Open Telescope" })
