@@ -1,14 +1,36 @@
 return {
   {
+    "amrbashir/nvim-docs-view",
+    lazy = true,
+    cmd = "DocsViewToggle",
+    opts = {
+      position = "bottom",
+    },
+  },
+  {
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup {
+        -- Configuration here, or leave empty to use defaults
+      }
+    end,
+  },
+  {
+    event = "VeryLazy",
+    "mbbill/undotree",
+  },
+  {
     "jose-elias-alvarez/null-ls.nvim",
     ft = "go",
-    opts = function ()
-      return require("configs.null-ls")
-    end
+    opts = function()
+      return require "configs.null-ls"
+    end,
   },
   {
     "stevearc/conform.nvim",
-    event = 'BufWritePre', -- uncomment for format on save
+    event = "BufWritePre", -- uncomment for format on save
     config = function()
       require "configs.conform"
     end,
@@ -17,8 +39,7 @@ return {
   {
     "tpope/vim-fugitive",
     event = "BufReadPost",
-    config = function()
-    end,
+    config = function() end,
   },
   {
     "folke/trouble.nvim",
@@ -72,9 +93,9 @@ return {
       handlers = {},
       ensure_installed = {
         "dlv",
-        "codelldb"
+        "codelldb",
       },
-    }
+    },
   },
   {
     "rcarriga/nvim-dap-ui",
@@ -86,24 +107,24 @@ return {
     },
     opts = {},
     config = function(_, opts)
-      local dap = require("dap")
-      local dapui = require("dapui")
+      local dap = require "dap"
+      local dapui = require "dapui"
       dapui.setup(opts)
       dap.listeners.after.event_initialized["dapui_config"] = function()
-        dapui.open({})
+        dapui.open {}
       end
       dap.listeners.before.event_terminated["dapui_config"] = function()
-        dapui.close({})
+        dapui.close {}
       end
       dap.listeners.before.event_exited["dapui_config"] = function()
-        dapui.close({})
+        dapui.close {}
       end
     end,
   },
   {
     "olexsmir/gopher.nvim",
     ft = "go",
-    config = function (_, opts)
+    config = function(_, opts)
       require("gopher").setup(opts)
     end,
     build = function()
@@ -133,7 +154,7 @@ return {
         dependencies = "copilot.lua",
         opts = {},
         config = function(_, opts)
-          local copilot_cmp = require("copilot_cmp")
+          local copilot_cmp = require "copilot_cmp"
           copilot_cmp.setup(opts)
           -- attach cmp source whenever copilot attaches
           -- fixes lazy-loading issues with the copilot cmp source
@@ -163,10 +184,16 @@ return {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
-        "lua-language-server", "stylua",
-        "html-lsp", "css-lsp", "prettier",
-        "terraform-ls", "gopls", "clangd", "clang-format",
-        "codelldb"
+        "lua-language-server",
+        "stylua",
+        "html-lsp",
+        "css-lsp",
+        "prettier",
+        "terraform-ls",
+        "gopls",
+        "clangd",
+        "clang-format",
+        "codelldb",
       },
     },
   },
@@ -175,10 +202,13 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       ensure_installed = {
-        "vim", "lua", "vimdoc",
-        "html", "css", "hcl"
+        "vim",
+        "lua",
+        "vimdoc",
+        "html",
+        "css",
+        "hcl",
       },
     },
   },
 }
-
