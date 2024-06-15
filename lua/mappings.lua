@@ -14,6 +14,7 @@ map("n", "<leader>tg", "<cmd>Telescope git_files<CR>", { desc = "Telescope git f
 
 -- add ctrl + shift + p to open Telescope
 map("n", "<C-S-P>", "<cmd>Telescope<CR>", { desc = "Open Telescope" })
+map("n", "<C-p>", "<cmd>Telescope live_grep<CR>", { desc = "Telescope git files search" })
 
 map("n", "<leader>db", "<cmd>DapToggleBreakpoint<CR>", { desc = "Toggle breakpoint" })
 map("n", "<leader>dus", function()
