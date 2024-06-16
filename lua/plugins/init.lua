@@ -9,7 +9,7 @@ return {
   },
   {
     "xiyaowong/transparent.nvim",
-    event = "VeryLazy",
+    lazy = false,
   },
   {
     "kylechui/nvim-surround",
