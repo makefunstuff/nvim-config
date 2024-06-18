@@ -8,6 +8,9 @@ return {
     },
   },
   {
+    "ThePrimeagen/harpoon",
+  },
+  {
     "xiyaowong/transparent.nvim",
     lazy = false,
   },
