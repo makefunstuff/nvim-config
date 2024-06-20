@@ -45,6 +45,7 @@ local open_with_trouble = require("trouble.sources.telescope").open
 local add_to_trouble = require("trouble.sources.telescope").add
 
 local telescope = require "telescope"
+telescope.load_extension "harpoon"
 
 telescope.setup {
   defaults = {
@@ -54,5 +55,3 @@ telescope.setup {
     },
   },
 }
-
-telescope.load_extension "harpoon"
