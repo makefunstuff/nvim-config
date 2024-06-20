@@ -4,8 +4,9 @@ local options = {
     css = { "prettier" },
     html = { "prettier" },
     go = { "goimports", "gofumpt" },
-    typescript = { "prettier", "prettierd "},
-    javascript = { "prettier", "prettierd" }
+    typescript = { "prettier", "prettierd " },
+    javascript = { "prettier", "prettierd" },
+    rust = { "rustfmt" },
   },
 
   format_on_save = {
