@@ -4,7 +4,7 @@ local on_init = require("nvchad.configs.lspconfig").on_init
 local capabilities = require("nvchad.configs.lspconfig").capabilities
 
 local lspconfig = require "lspconfig"
-local servers = { "html", "cssls", "tsserver", "zls", "yamlls", "terraformls", "helm_ls" }
+local servers = { "html", "cssls", "tsserver", "zls", "yamlls", "terraformls", "helm_ls", "rust-analyzer", "zls" }
 
 -- lsps with default config
 for _, lsp in ipairs(servers) do
@@ -28,7 +28,6 @@ lspconfig.clangd.setup {
   capabilities = capabilities,
 }
 
-
 lspconfig.gopls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
@@ -42,7 +41,7 @@ lspconfig.gopls.setup {
       staticcheck = true,
       analyses = {
         unusedparams = true,
-      }
-    }
-  }
+      },
+    },
+  },
 }
