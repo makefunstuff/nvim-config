@@ -12,7 +12,6 @@ local servers = {
   "yamlls",
   "terraformls",
   "helm_ls",
-  "rust_analyzer",
   "zls",
 }
 
@@ -36,6 +35,19 @@ lspconfig.clangd.setup {
   on_attach = on_attach,
   on_init = on_init,
   capabilities = capabilities,
+}
+
+lspconfig.rust_analyzer.setup {
+  on_attach = on_attach,
+  on_init = on_init,
+  capabilities = capabilities,
+  settings = {
+    ["rust_analyzer"] = {
+      diagnostics = {
+        enable = true,
+      },
+    },
+  },
 }
 
 lspconfig.gopls.setup {
