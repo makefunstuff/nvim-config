@@ -7,6 +7,7 @@ local options = {
     typescript = { "prettier", "prettierd " },
     javascript = { "prettier", "prettierd" },
     rust = { "rustfmt" },
+    yaml = { "prettier" },
   },
 
   format_on_save = {
