@@ -13,6 +13,7 @@ local servers = {
   "terraformls",
   "helm_ls",
   "zls",
+  "ols"
 }
 
 -- lsps with default config
