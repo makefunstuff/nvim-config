@@ -5,7 +5,7 @@ require "nvchad.mappings"
 local map = vim.keymap.set
 local harpoon = require "harpoon.mark"
 local ui = require "harpoon.ui"
-local chat = require("CopilotChat");
+local chat = require "CopilotChat"
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
@@ -29,3 +29,4 @@ map("n", "<leader>dte", "<cmd> TransparentToggle<CR>", { desc = "Toggle transpar
 map("n", "<leader>dtm", harpoon.add_file, { desc = "Add file to harpoon" })
 map("n", "<leader>dtq", ui.toggle_quick_menu, { desc = "Toggle harpoon" })
 map("n", "<leader>dtc", chat.toggle, { desc = "Toggle Copilot Chat" })
+map("n", "<leader>dta", "<cmd> Gen<CR>", { desc = "Generate with ollama" })
