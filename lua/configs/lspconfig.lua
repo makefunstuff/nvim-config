@@ -9,11 +9,10 @@ local servers = {
   "cssls",
   "tsserver",
   "zls",
-  "yamlls",
   "terraformls",
   "helm_ls",
   "zls",
-  "ols"
+  "ols",
 }
 
 -- lsps with default config
