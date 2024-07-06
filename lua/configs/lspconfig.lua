@@ -24,14 +24,21 @@ for _, lsp in ipairs(servers) do
   }
 end
 
--- typescript
-lspconfig.tsserver.setup {
+lspconfig.clangd.setup {
   on_attach = on_attach,
   on_init = on_init,
   capabilities = capabilities,
+  settings = {
+    clangd = {
+      semanticHighlighting = true,
+      -- TODO: add os specific path
+      header_search = { "/opt/homebrew/include", "/opt/homebrew/lib" },
+    },
+  },
 }
 
-lspconfig.clangd.setup {
+-- typescript
+lspconfig.tsserver.setup {
   on_attach = on_attach,
   on_init = on_init,
   capabilities = capabilities,
