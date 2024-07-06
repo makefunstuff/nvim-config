@@ -26,15 +26,23 @@ end
 
 lspconfig.clangd.setup {
   on_attach = on_attach,
-  on_init = on_init,
-  capabilities = capabilities,
-  settings = {
-    clangd = {
-      semanticHighlighting = true,
-      -- TODO: add os specific path
-      header_search = { "/opt/homebrew/include", "/opt/homebrew/lib" },
-    },
+  cmd = {
+    "/opt/homebrew/opt/llvm/bin/clangd",
+    "--background-index",
+    "--pch-storage=memory",
+    "--all-scopes-completion",
+    "--pretty",
+    "--header-insertion=never",
+    "-j=4",
+    "--inlay-hints",
+    "--header-insertion-decorators",
+    "--function-arg-placeholders",
+    "--completion-style=detailed",
   },
+  filetypes = { "c", "cpp", "objc", "objcpp" },
+  root_dir = require("lspconfig").util.root_pattern "src",
+  init_option = { fallbackFlags = { "-std=c++2a" } },
+  capabilities = capabilities,
 }
 
 -- typescript
