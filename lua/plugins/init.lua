@@ -38,7 +38,7 @@ return {
     "David-Kunz/gen.nvim",
     lazy = false,
     opts = {
-      model = "gemma2", -- The default model to use.
+      model = "deepseek-coder", -- The default model to use.
       host = "localhost", -- The host running the Ollama service.
       port = "11434",
       quit_map = "q", -- set keymap for close the response window
@@ -73,7 +73,9 @@ return {
     },
     opts = {
       debug = true, -- Enable debugging
-      -- See Configuration section for rest
+      window = {
+        layout = "horizontal",
+      },
     },
     -- See Commands section for default commands if you want to lazy load on them
   },
