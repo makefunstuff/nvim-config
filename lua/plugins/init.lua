@@ -28,56 +28,8 @@ return {
     },
     dependencies = {
       "MunifTanjim/nui.nvim",
-      -- OPTIONAL:
-      --   `nvim-notify` is only needed, if you want to use the notification view.
-      --   If not available, we use `mini` as the fallback
       "rcarriga/nvim-notify",
     },
-  },
-  {
-    "David-Kunz/gen.nvim",
-    lazy = false,
-    opts = {
-      model = "deepseek-coder", -- The default model to use.
-      host = "localhost", -- The host running the Ollama service.
-      port = "11434",
-      quit_map = "q", -- set keymap for close the response window
-      retry_map = "<c-r>", -- set keymap to re-send the current prompt
-      command = function(options)
-        local body = { model = options.model, stream = true }
-        return "curl --silent --no-buffer -X POST http://"
-          .. options.host
-          .. ":"
-          .. options.port
-          .. "/api/chat -d $body"
-      end,
-      -- The command for the Ollama service. You can use placeholders $prompt, $model and $body (shellescaped).
-      -- This can also be a command string.
-      -- The executed command must return a JSON object with { response, context }
-      -- (context property is optional).
-      -- list_models = '<omitted lua function>', -- Retrieves a list of model names
-      display_mode = "float", -- The display mode. Can be "float" or "split" or "horizontal-split".
-      show_prompt = false, -- Shows the prompt submitted to Ollama.
-      show_model = false, -- Displays which model you are using at the beginning of your chat session.
-      no_auto_close = false, -- Never closes the window automatically.
-      debug = false, -- Prints errors and the command which is run.
-    },
-  },
-  {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    lazy = true,
-    branch = "canary",
-    dependencies = {
-      { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-      { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
-    },
-    opts = {
-      debug = true, -- Enable debugging
-      window = {
-        layout = "horizontal",
-      },
-    },
-    -- See Commands section for default commands if you want to lazy load on them
   },
   {
     "amrbashir/nvim-docs-view",
@@ -220,46 +172,7 @@ return {
   },
 
   {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    build = ":Copilot auth",
-    opts = {
-      suggestion = { enabled = false },
-      panel = { enabled = false },
-      filetypes = {
-        yaml = true,
-        markdown = true,
-        help = true,
-        zig = false,
-        go = false,
-        rust = false,
-      },
-    },
-  },
-
-  {
     "nvim-cmp",
-    dependencies = {
-      {
-        "zbirenbaum/copilot-cmp",
-        dependencies = "copilot.lua",
-        opts = {},
-        config = function(_, opts)
-          local copilot_cmp = require "copilot_cmp"
-          copilot_cmp.setup(opts)
-          -- attach cmp source whenever copilot attaches
-          -- fixes lazy-loading issues with the copilot cmp source
-        end,
-      },
-    },
-    ---@param opts cmp.ConfigSchema
-    opts = function(_, opts)
-      table.insert(opts.sources, 1, {
-        name = "copilot",
-        group_index = 1,
-        priority = 100,
-      })
-    end,
   },
 
   -- These are some examples, uncomment them if you want to see them work!
