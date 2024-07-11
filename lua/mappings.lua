@@ -27,4 +27,5 @@ map("n", "<leader>dr", "<cmd> DapContinue<CR>", { desc = "Start or continue debu
 map("n", "<leader>dte", "<cmd> TransparentToggle<CR>", { desc = "Toggle transparent" })
 map("n", "<leader>dtm", harpoon.add_file, { desc = "Add file to harpoon" })
 map("n", "<leader>dtq", ui.toggle_quick_menu, { desc = "Toggle harpoon" })
-map("n", "<leader>dta", "<cmd> Gen<CR>", { desc = "Generate with ollama" })
+map("n", "<leader>cr", "<cmd> Cargo run<CR>", { desc = "Run Cargo" })
+map("n", "<leader>cb", "<cmd> Cargo build<CR>", { desc = "build Cargo" })

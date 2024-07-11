@@ -19,6 +19,9 @@ return {
           ["cmp.entry.get_documentation"] = true,
         },
       },
+      messages = {
+        enabled = false,
+      },
       routes = {
         {
           view = "notify",
