@@ -1,5 +1,9 @@
 return {
   {
+    "Exafunction/codeium.vim",
+    event = "BufEnter",
+  },
+  {
     "folke/noice.nvim",
     event = "VeryLazy",
     opts = {
