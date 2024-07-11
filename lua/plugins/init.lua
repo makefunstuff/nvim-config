@@ -22,6 +22,9 @@ return {
       messages = {
         enabled = false,
       },
+      notify = {
+        enabled = false,
+      },
       routes = {
         {
           view = "notify",
