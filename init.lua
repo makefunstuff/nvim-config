@@ -39,9 +39,14 @@ vim.schedule(function()
 end)
 
 local telescope = require "telescope"
+local open_with_trouble = require("trouble.sources.telescope").open
+
 telescope.setup {
   defaults = {
     border = true,
+    mappings = {
+      n = { ["<Leader>to"] = open_with_trouble },
+    },
   },
 }
 telescope.load_extension "harpoon"
