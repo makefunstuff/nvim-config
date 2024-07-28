@@ -13,6 +13,7 @@ local servers = {
   "helm_ls",
   "zls",
   "ols",
+  "markdown_oxide",
 }
 
 -- lsps with default config
@@ -40,8 +41,6 @@ lspconfig.clangd.setup {
     "--completion-style=detailed",
   },
   filetypes = { "c", "cpp", "objc", "objcpp" },
-  root_dir = require("lspconfig").util.root_pattern "src",
-  init_option = { fallbackFlags = { "-std=c++2a" } },
   capabilities = capabilities,
 }
 
@@ -63,6 +62,15 @@ lspconfig.rust_analyzer.setup {
       },
     },
   },
+}
+
+-- Disable diagnostics globally
+vim.diagnostic.config {
+  virtual_text = false,
+  signs = false,
+  underline = false,
+  update_in_insert = false,
+  severity_sort = false,
 }
 
 lspconfig.gopls.setup {

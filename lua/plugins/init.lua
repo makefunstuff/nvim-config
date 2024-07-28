@@ -1,9 +1,5 @@
 return {
   {
-    "Exafunction/codeium.vim",
-    event = "BufEnter",
-  },
-  {
     "folke/noice.nvim",
     event = "VeryLazy",
     opts = {
@@ -223,6 +219,17 @@ return {
         "css",
         "hcl",
       },
+    },
+  },
+  {
+    "dustinblackman/oatmeal.nvim",
+    cmd = { "Oatmeal" },
+    keys = {
+      { "<leader>om", mode = "n", desc = "Start Oatmeal session" },
+    },
+    opts = {
+      backend = "ollama",
+      model = "llama3.1:latest",
     },
   },
 }
