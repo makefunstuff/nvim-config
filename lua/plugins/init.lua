@@ -142,6 +142,36 @@ return {
 
       require("dap-lldb").setup()
 
+      dap.configurations.zig = {
+        {
+          name = "Debug Zig With Arguments",
+          type = "lldb",
+          request = "launch",
+          program = function()
+            return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+          end,
+          args = function()
+            local input = vim.fn.input "Arguments: "
+            return vim.split(input, " ")
+          end,
+          cwd = "${workspaceFolder}",
+          stopOnEntry = false,
+          runInTerminal = false,
+        },
+        {
+          name = "Debug Zig Without Arguments",
+          type = "lldb",
+          request = "launch",
+          program = function()
+            return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+          end,
+          args = {},
+          cwd = "${workspaceFolder}",
+          stopOnEntry = false,
+          runInTerminal = false,
+        },
+      }
+
       vim.keymap.set("n", "<space>gb", dap.run_to_cursor)
       -- Eval var under cursor
       vim.keymap.set("n", "<space>?", function()
