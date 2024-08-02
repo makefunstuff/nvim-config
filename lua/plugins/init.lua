@@ -3,7 +3,11 @@ return {
     "makefunstuff/sketchbook.nvim",
     lazy = false,
     config = function()
-      require("sketchbook").setup {}
+      require("sketchbook").setup {
+        keymaps = {
+          select_template = "<leader>tmp",
+        },
+      }
     end,
   },
   {

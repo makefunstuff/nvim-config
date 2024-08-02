@@ -52,5 +52,4 @@ telescope.setup {
 telescope.load_extension "harpoon"
 
 -- set lazy redraw
-vim.opt_global.lazyredraw = true
 vim.opt_global.synmaxcol = 300
