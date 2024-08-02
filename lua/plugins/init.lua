@@ -1,5 +1,12 @@
 return {
   {
+    "makefunstuff/sketchbook.nvim",
+    lazy = false,
+    config = function()
+      require("sketchbook").setup {}
+    end,
+  },
+  {
     "folke/noice.nvim",
     event = "VeryLazy",
     opts = {
