@@ -115,7 +115,7 @@ return {
   },
   {
     "stevearc/conform.nvim",
-    event = "BufWritePre", -- uncomment for format on save
+    -- event = "BufWritePre", -- uncomment for format on save
     config = function()
       require "configs.conform"
     end,
@@ -212,6 +212,35 @@ return {
         },
       }
 
+      dap.configurations.odin = {
+        {
+          name = "Debug Odin With Arguments",
+          type = "lldb",
+          request = "launch",
+          program = function()
+            return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+          end,
+          args = function()
+            local input = vim.fn.input "Arguments: "
+            return vim.split(input, " ")
+          end,
+          cwd = "${workspaceFolder}",
+          stopOnEntry = false,
+          runInTerminal = false,
+        },
+        {
+          name = "Debug Odin Without Arguments",
+          type = "lldb",
+          request = "launch",
+          program = function()
+            return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+          end,
+          args = {},
+          cwd = "${workspaceFolder}",
+          stopOnEntry = false,
+          runInTerminal = false,
+        },
+      }
       vim.keymap.set("n", "<space>gb", dap.run_to_cursor)
       -- Eval var under cursor
       vim.keymap.set("n", "<space>?", function()
@@ -307,7 +336,12 @@ return {
         "vim",
         "lua",
         "vimdoc",
+        "odin",
         "html",
+        "glsl",
+        "cpp",
+        "zig",
+        "go",
         "css",
         "hcl",
       },

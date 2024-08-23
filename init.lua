@@ -55,3 +55,9 @@ telescope.load_extension "harpoon"
 
 -- set lazy redraw
 vim.opt_global.synmaxcol = 300
+
+-- Filetype detection for .fs and .vs files
+vim.cmd [[
+  autocmd BufRead,BufNewFile *.fs set filetype=glsl
+  autocmd BufRead,BufNewFile *.vs set filetype=glsl
+]]
