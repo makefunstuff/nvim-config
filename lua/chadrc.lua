@@ -4,11 +4,13 @@
 ---@type ChadrcConfig
 local M = {}
 M.ui = {
-  theme = "tokyonight",
+  theme = "pastelDark",
   telescope = { style = "bordered" },
   statusline = {
-    theme = "minimal",
-    separator_style = "round",
+    theme = "default",
+  },
+  tabufline = {
+    enabled = false,
   },
   -- hl_override = {
   -- 	Comment = { italic = true },
