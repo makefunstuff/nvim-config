@@ -60,5 +60,4 @@ vim.opt_global.synmaxcol = 300
 vim.cmd [[
   autocmd BufRead,BufNewFile *.fs set filetype=glsl
   autocmd BufRead,BufNewFile *.vs set filetype=glsl
-  set laststatus=0
 ]]

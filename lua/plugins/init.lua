@@ -1,5 +1,11 @@
 return {
   {
+    "NvChad/ui",
+    config = function()
+      vim.opt.statusline=""
+    end
+  },
+  {
     lazy = false,
     "folke/zen-mode.nvim",
     opts = {
