@@ -61,3 +61,11 @@ vim.cmd [[
   autocmd BufRead,BufNewFile *.fs set filetype=glsl
   autocmd BufRead,BufNewFile *.vs set filetype=glsl
 ]]
+
+
+
+if vim.fn.has("win32") == 1 then
+  vim.cmd("set makeprg=build.bat")
+else
+  vim.cmd("set makeprg=make")
+end
