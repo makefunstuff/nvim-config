@@ -63,9 +63,7 @@ vim.cmd [[
 ]]
 
 
-
-if vim.fn.has("win32") == 1 then
-  vim.cmd("set makeprg=build.bat")
-else
-  vim.cmd("set makeprg=make")
+local project_config = vim.fn.getcwd() .. ".project.lua"
+if vim.fn.filereadable(project_config) == 1 then
+  dofile(project_config)
 end
