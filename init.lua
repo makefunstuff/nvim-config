@@ -51,7 +51,6 @@ telescope.setup {
     },
   },
 }
-telescope.load_extension "harpoon"
 
 -- set lazy redraw
 vim.opt_global.synmaxcol = 300
@@ -60,4 +59,5 @@ vim.opt_global.synmaxcol = 300
 vim.cmd [[
   autocmd BufRead,BufNewFile *.fs set filetype=glsl
   autocmd BufRead,BufNewFile *.vs set filetype=glsl
+  colorscheme "default"
 ]]

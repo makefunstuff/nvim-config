@@ -4,7 +4,7 @@
 ---@type ChadrcConfig
 local M = {}
 M.ui = {
-  theme = "pastelDark",
+  theme = "monochrome",
   telescope = { style = "bordered" },
   statusline = {
     theme = "default",

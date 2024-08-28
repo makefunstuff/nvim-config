@@ -2,8 +2,8 @@ return {
   {
     "NvChad/ui",
     config = function()
-      vim.opt.statusline=""
-    end
+      vim.opt.statusline = ""
+    end,
   },
   {
     lazy = false,
@@ -46,53 +46,12 @@ return {
     end,
   },
   {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    opts = {
-      lsp = {
-        hover = {
-          enabled = false,
-        },
-        signature = {
-          enabled = false,
-        },
-        progress = {
-          enabled = false,
-        },
-        override = {
-          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-          ["vim.lsp.util.stylize_markdown"] = true,
-          ["cmp.entry.get_documentation"] = true,
-        },
-      },
-      messages = {
-        enabled = false,
-      },
-      notify = {
-        enabled = false,
-      },
-      routes = {
-        {
-          view = "notify",
-          filter = { event = "msg_showmode" },
-        },
-      },
-    },
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
-    },
-  },
-  {
     "amrbashir/nvim-docs-view",
     lazy = true,
     cmd = "DocsViewToggle",
     opts = {
       position = "bottom",
     },
-  },
-  {
-    "ThePrimeagen/harpoon",
   },
   {
     "xiyaowong/transparent.nvim",
@@ -111,13 +70,6 @@ return {
   {
     event = "VeryLazy",
     "mbbill/undotree",
-  },
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    ft = "go",
-    opts = function()
-      return require "configs.null-ls"
-    end,
   },
   {
     "stevearc/conform.nvim",
@@ -351,17 +303,6 @@ return {
         "css",
         "hcl",
       },
-    },
-  },
-  {
-    "dustinblackman/oatmeal.nvim",
-    cmd = { "Oatmeal" },
-    keys = {
-      { "<leader>om", mode = "n", desc = "Start Oatmeal session" },
-    },
-    opts = {
-      backend = "ollama",
-      model = "llama3.1:latest",
     },
   },
 }
