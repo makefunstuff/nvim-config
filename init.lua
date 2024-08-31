@@ -39,4 +39,5 @@ if vim.fn.filereadable(project_config) == 1 then
   dofile(project_config)
 end
 
+vim.cmd [[colorscheme no-clown-fiesta]]
 require 'config.mappings'
