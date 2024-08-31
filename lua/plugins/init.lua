@@ -275,11 +275,11 @@ return {
     },
   },
 
-  require 'indent_line'
-  require 'lsp'
-  require 'autopairs'
-  require 'cmp'
-  require 'conform'
-  require 'debug'
-  require 'gitsigns'
+  require 'plugins.indent_line',
+  require 'plugins.lsp',
+  require 'plugins.autopairs',
+  require 'plugins.cmp',
+  require 'plugins.conform',
+  require 'plugins.debug',
+  require 'plugins.gitsigns',
 }
