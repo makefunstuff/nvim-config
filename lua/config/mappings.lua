@@ -30,9 +30,8 @@ map('n', '<leader>ds', vim.diagnostic.setloclist, { desc = 'LSP Diagnostic locli
 map('n', '<leader>/', 'gcc', { desc = 'Toggle Comment', remap = true })
 map('v', '<leader>/', 'gc', { desc = 'Toggle comment', remap = true })
 
--- nvimtree
-map('n', '<C-n>', '<cmd>NvimTreeToggle<CR>', { desc = 'nvimtree toggle window' })
-map('n', '<leader>e', '<cmd>NvimTreeFocus<CR>', { desc = 'nvimtree focus window' })
+-- netwrw
+map('n', '<C-n>', '<cmd>e .<CR>', { desc = 'Open netrw' })
 
 -- telescope
 map('n', '<leader>fw', '<cmd>Telescope live_grep<CR>', { desc = 'telescope live grep' })
