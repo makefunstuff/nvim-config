@@ -70,3 +70,6 @@ map('n', '<leader>dr', '<cmd> DapContinue<CR>', { desc = 'Start or continue debu
 
 map('n', '<Esc>', '<cmd>nohlsearch<CR>')
 map('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+
+--- compile
+map('n', '<leader>mb', '<cmd>make<CR>', { desc = 'Compile project' })
