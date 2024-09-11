@@ -1,5 +1,5 @@
 -- line numbers
-vim.opt.number = false
+vim.opt.number = true
 
 vim.opt.showmode = false
 
@@ -27,3 +27,4 @@ vim.opt.cursorline = true
 vim.opt_global.synmaxcol = 300
 
 vim.opt.scrolloff = 10
+vim.wo.relativenumber = true

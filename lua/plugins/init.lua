@@ -21,6 +21,19 @@ return {
       require('orgmode').setup {
         org_agenda_files = '~/org/**/*',
         org_default_notes_file = '~/org/notes.org',
+        ord_todo_keywords = { 'TODO', 'CANCELLED', 'DONE' },
+        org_capture_templates = {
+          j = {
+            description = 'Journal',
+            template = '\n*** %<%Y-%m-%d> %<%A>\n**** %U\n\n%?',
+            target = '~/org/journal.org',
+          },
+          n = {
+            decription = 'Note',
+            template = '* %(return vim.fn.getreg "w")',
+            target = '~/org/notes.org',
+          },
+        },
       }
     end,
   },
