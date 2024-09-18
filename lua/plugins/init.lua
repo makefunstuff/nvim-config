@@ -40,6 +40,9 @@ return {
   {
     'aktersnurra/no-clown-fiesta.nvim',
   },
+  {
+    'rafi/awesome-vim-colorschemes',
+  },
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
