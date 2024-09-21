@@ -275,7 +275,6 @@ return {
     },
   },
 
-  require 'plugins.indent_line',
   require 'plugins.lsp',
   require 'plugins.autopairs',
   require 'plugins.cmp',
