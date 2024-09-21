@@ -281,4 +281,5 @@ return {
   require 'plugins.conform',
   require 'plugins.debug',
   require 'plugins.gitsigns',
+  require 'plugins.treesitter-text-objects',
 }
