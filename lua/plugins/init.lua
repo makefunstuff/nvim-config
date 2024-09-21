@@ -37,6 +37,7 @@ return {
       }
     end,
   },
+  { 'slugbyte/lackluster.nvim' },
   {
     'aktersnurra/no-clown-fiesta.nvim',
   },
