@@ -39,7 +39,7 @@ if vim.fn.filereadable(project_config) == 1 then
   dofile(project_config)
 end
 
-vim.cmd [[colorscheme lackluster-hack]]
+vim.cmd [[colorscheme lackluster-mint]]
 require 'config.mappings'
 
 if vim.fn.has 'win32' == 1 or vim.fn.has 'win64' == 1 then
