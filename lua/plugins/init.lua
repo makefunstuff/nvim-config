@@ -30,6 +30,10 @@ return {
           },
           n = {
             description = 'Note',
+            target = '~/org/journal.org',
+          },
+          n = {
+            decription = 'Note',
             template = '* %(return vim.fn.getreg "w")',
             target = '~/org/notes.org',
           },
@@ -37,8 +41,12 @@ return {
       }
     end,
   },
+  { 'slugbyte/lackluster.nvim' },
   {
     'aktersnurra/no-clown-fiesta.nvim',
+  },
+  {
+    'rafi/awesome-vim-colorschemes',
   },
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
@@ -271,11 +279,11 @@ return {
     },
   },
 
-  require 'plugins.indent_line',
   require 'plugins.lsp',
   require 'plugins.autopairs',
   require 'plugins.cmp',
   require 'plugins.conform',
   require 'plugins.debug',
   require 'plugins.gitsigns',
+  require 'plugins.treesitter-text-objects',
 }

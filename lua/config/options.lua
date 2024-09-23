@@ -27,5 +27,4 @@ vim.opt.cursorline = true
 vim.opt_global.synmaxcol = 300
 
 vim.opt.scrolloff = 10
-
 vim.wo.relativenumber = true
