@@ -37,7 +37,29 @@ return {
       }
     end,
   },
-  { 'slugbyte/lackluster.nvim' },
+  {
+    'slugbyte/lackluster.nvim',
+    config = function()
+      lackluster = require 'lackluster'
+
+      lackluster.setup {
+        tweak_syntax = {
+          comment = '#686756',
+          string = 'default',
+          string_escape = 'default',
+          builtin = '#90B080',
+          type = 'default',
+          keyword = '#D08F20',
+          keyword_return = '#D08F20',
+          keyword_exception = '#D08F20',
+        },
+        tweak_background = {
+          normal = '#0C0C0C',
+        },
+      }
+      vim.cmd.colorscheme 'lackluster-hack'
+    end,
+  },
   {
     'aktersnurra/no-clown-fiesta.nvim',
   },
