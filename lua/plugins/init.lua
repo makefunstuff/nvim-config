@@ -29,7 +29,7 @@ return {
             target = '~/org/journal.org',
           },
           n = {
-            decription = 'Note',
+            description = 'Note',
             template = '* %(return vim.fn.getreg "w")',
             target = '~/org/notes.org',
           },
