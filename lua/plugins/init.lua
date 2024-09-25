@@ -53,6 +53,9 @@ return {
           keyword_return = '#D08F20',
           keyword_exception = '#D08F20',
         },
+        disable_plugin = {
+          todo_comments = true,
+        },
         tweak_background = {
           normal = '#0C0C0C',
         },
@@ -179,8 +182,45 @@ return {
       end, { desc = '[S]earch [N]eovim files' })
     end,
   },
-  -- Highlight todo, notes, etc in comments
-  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+  {
+    'folke/todo-comments.nvim',
+    event = 'vimenter',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    opts = {
+      keywords = {
+        TODO = {
+          color = '#2aa330',
+        },
+        WARN = {
+          color = '#af3139',
+        },
+        NOTE = {
+          color = '#894a7a',
+        },
+      },
+      gui_style = {
+        fg = 'NONE',
+        bg = 'BOLD',
+      },
+      highlight = {
+        keyword = 'bg',
+        pattern = [[.*<(KEYWORDS)\(\w*\)\s*]],
+      },
+      signs = false,
+    },
+
+    search = {
+      command = 'rg',
+      args = {
+        '--color=never',
+        '--no-heading',
+        '--with-filename',
+        '--line-number',
+        '--column',
+      },
+      pattern = [[.*<(KEYWORDS)\(\w*\)\s*]],
+    },
+  },
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
