@@ -43,15 +43,33 @@ return {
       lackluster = require 'lackluster'
 
       lackluster.setup {
+        tweak_color = {
+          lack = 'default',
+          luster = 'default',
+          orange = 'default',
+          yellow = 'default',
+          green = 'default',
+          blue = 'default',
+          red = 'default',
+          gray1 = 'default',
+          gray2 = 'default',
+          gray3 = 'default',
+          gray4 = 'default',
+          gray5 = 'default',
+          gray6 = 'default',
+          gray7 = '#90B080',
+          gray8 = 'default',
+          gray9 = 'default',
+        },
         tweak_syntax = {
           comment = '#686756',
           string = 'default',
           string_escape = 'default',
-          builtin = '#90B080',
+          builtin = 'default',
           type = 'default',
-          keyword = '#D08F20',
-          keyword_return = '#D08F20',
-          keyword_exception = '#D08F20',
+          keyword = 'default',
+          keyword_return = 'default',
+          keyword_exception = 'default',
         },
         disable_plugin = {
           todo_comments = true,
