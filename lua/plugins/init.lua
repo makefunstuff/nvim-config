@@ -199,12 +199,13 @@ return {
         },
       },
       gui_style = {
-        fg = 'NONE',
+        fg = 'BOLD',
         bg = 'BOLD',
       },
       highlight = {
-        keyword = 'bg',
-        pattern = [[.*<(KEYWORDS)\(\w*\)\s*]],
+        after = 'empty',
+        keyword = 'fg',
+        pattern = [[.*<(KEYWORDS)\s*]],
       },
       signs = false,
     },
