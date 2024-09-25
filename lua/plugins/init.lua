@@ -57,7 +57,7 @@ return {
           gray4 = 'default',
           gray5 = 'default',
           gray6 = 'default',
-          gray7 = '#90B080',
+          gray7 = 'default',
           gray8 = 'default',
           gray9 = 'default',
         },
@@ -78,7 +78,7 @@ return {
           normal = '#0C0C0C',
         },
       }
-      vim.cmd.colorscheme 'lackluster-hack'
+      vim.cmd.colorscheme 'lackluster-mint'
     end,
   },
   {
