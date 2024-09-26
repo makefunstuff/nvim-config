@@ -47,21 +47,42 @@ return {
       lackluster = require 'lackluster'
 
       lackluster.setup {
+        tweak_color = {
+          lack = 'default',
+          luster = 'default',
+          orange = 'default',
+          yellow = 'default',
+          green = 'default',
+          blue = 'default',
+          red = 'default',
+          gray1 = 'default',
+          gray2 = 'default',
+          gray3 = 'default',
+          gray4 = 'default',
+          gray5 = 'default',
+          gray6 = 'default',
+          gray7 = 'default',
+          gray8 = 'default',
+          gray9 = 'default',
+        },
         tweak_syntax = {
           comment = '#686756',
           string = 'default',
           string_escape = 'default',
-          builtin = '#90B080',
+          builtin = 'default',
           type = 'default',
-          keyword = '#D08F20',
-          keyword_return = '#D08F20',
-          keyword_exception = '#D08F20',
+          keyword = 'default',
+          keyword_return = 'default',
+          keyword_exception = 'default',
+        },
+        disable_plugin = {
+          todo_comments = true,
         },
         tweak_background = {
           normal = '#0C0C0C',
         },
       }
-      vim.cmd.colorscheme 'lackluster-hack'
+      vim.cmd.colorscheme 'lackluster-mint'
     end,
   },
   {
@@ -183,8 +204,46 @@ return {
       end, { desc = '[S]earch [N]eovim files' })
     end,
   },
-  -- Highlight todo, notes, etc in comments
-  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+  {
+    'folke/todo-comments.nvim',
+    event = 'vimenter',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    opts = {
+      keywords = {
+        TODO = {
+          color = '#2aa330',
+        },
+        WARN = {
+          color = '#af3139',
+        },
+        NOTE = {
+          color = '#894a7a',
+        },
+      },
+      gui_style = {
+        fg = 'BOLD',
+        bg = 'BOLD',
+      },
+      highlight = {
+        after = 'empty',
+        keyword = 'fg',
+        pattern = [[.*<(KEYWORDS)\s*]],
+      },
+      signs = false,
+    },
+
+    search = {
+      command = 'rg',
+      args = {
+        '--color=never',
+        '--no-heading',
+        '--with-filename',
+        '--line-number',
+        '--column',
+      },
+      pattern = [[.*<(KEYWORDS)\(\w*\)\s*]],
+    },
+  },
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
