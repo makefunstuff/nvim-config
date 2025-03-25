@@ -363,4 +363,5 @@ return {
   require 'plugins.debug',
   require 'plugins.gitsigns',
   require 'plugins.treesitter-text-objects',
+  require 'plugins.ai',
 }
