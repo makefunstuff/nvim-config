@@ -47,7 +47,7 @@ map('n', '<leader>ff', '<cmd>Telescope find_files<cr>', { desc = 'telescope find
 map('n', '<leader>fa', '<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>', { desc = 'telescope find all files' })
 
 map('n', '<leader>cc', '<cmd>CodeCompanionChat<cr>', { desc = 'code companion chat' })
-map('n', '<leader>cp', '<cmd>CodeCompanion<cr>', { desc = 'code companion prompt' })
+map('v', '<leader>vcp', '<cmd>CodeCompanion<cr>', { desc = 'code companion prompt' })
 
 -- terminal
 map('t', '<C-x>', '<C-\\><C-N>', { desc = 'terminal escape terminal mode' })
