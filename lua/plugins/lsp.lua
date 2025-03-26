@@ -1,3 +1,10 @@
+local function get_python_path()
+  if vim.env.VIRTUAL_ENV then
+    return vim.env.VIRTUAL_ENV .. '/bin/python'
+  end
+  return 'python3'
+end
+
 return {
   {
     -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
@@ -98,6 +105,9 @@ return {
       local servers = {
         clangd = {},
         gopls = {},
+        pylsp = {
+          cmd = { get_python_path(), '-m', 'pylsp' },
+        },
         ols = {},
         zls = {},
         tsserver = {},

@@ -31,6 +31,8 @@ require('lazy').setup({
 vim.cmd [[
   autocmd BufRead,BufNewFile *.fs set filetype=glsl
   autocmd BufRead,BufNewFile *.vs set filetype=glsl
+  autocmd BufRead,BufNewFile *.hlsl set filetype=hlsl
+  autocmd BufRead,BufNewFile *.fx set filetype=hlsl
   colorscheme "default"
 ]]
 
