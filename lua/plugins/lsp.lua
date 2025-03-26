@@ -103,7 +103,7 @@ return {
         },
         ols = {},
         zls = {},
-        tsserver = {},
+        ts_ls = {},
 
         lua_ls = {
           -- cmd = {...},
@@ -133,7 +133,7 @@ return {
         'stylua', -- Used to format Lua code
         'ols',
         'zls',
-        'tsserver',
+        'ts_ls',
         'gopls',
         'clangd',
       })

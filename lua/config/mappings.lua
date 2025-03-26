@@ -1,4 +1,4 @@
-local map = vim.keymap.setinit
+local map = vim.keymap.set
 
 map('i', '<C-b>', '<ESC>^i', { desc = 'move beginning of line' })
 map('i', '<C-e>', '<End>', { desc = 'move end of line' })
@@ -47,7 +47,7 @@ map('n', '<leader>ff', '<cmd>Telescope find_files<cr>', { desc = 'telescope find
 map('n', '<leader>fa', '<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>', { desc = 'telescope find all files' })
 
 map('n', '<leader>fcc', '<cmd>CodeCompanionChat<cr>', { desc = 'code companion chat' })
-map('v', '<leader>fcp', '<cmd>CodeCompanion<cr>', { desc = 'code companion prompt' })
+map('n', '<leader>fcp', '<cmd>CodeCompanion<cr>', { desc = 'telescope find files' })
 
 -- terminal
 map('t', '<C-x>', '<C-\\><C-N>', { desc = 'terminal escape terminal mode' })
