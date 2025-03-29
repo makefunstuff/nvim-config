@@ -369,4 +369,5 @@ return {
   require 'plugins.treesitter-text-objects',
   require 'plugins.ai',
   require 'plugins.mcp',
+  require 'plugins.avante',
 }
