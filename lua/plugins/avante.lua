@@ -8,7 +8,7 @@ return {
     provider = 'openai',
     openai = {
       endpoint = 'https://openrouter.ai/api/v1',
-      model = 'gpt-4o', -- your desired model (or use gpt-4o, etc.)
+      model = 'google/gemini-2.0-flash-lite-001',
       timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
       temperature = 0,
       max_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)

@@ -48,3 +48,8 @@ require 'config.mappings'
 if vim.fn.has 'win32' == 1 or vim.fn.has 'win64' == 1 then
   require 'config.windows'
 end
+
+vim.api.nvim_create_autocmd('BufWritePost', {
+  pattern = '~/.config/nvim/lua/plugins/*.lua',
+  command = "lua ReloadLuaFiles(vim.fn.expand('~/.config/nvim/lua/plugins'))",
+})
