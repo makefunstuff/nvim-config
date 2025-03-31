@@ -27,6 +27,8 @@ require('lazy').setup({
   },
 })
 
+require('focus').setup()
+
 -- Filetype detection for .fs and .vs files
 vim.cmd [[
   autocmd BufRead,BufNewFile *.fs set filetype=glsl

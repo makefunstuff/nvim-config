@@ -14,6 +14,15 @@ return {
       max_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
       --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
     },
+    rag_service = {
+      enabled = true,
+      host_mount = os.getenv 'HOME',
+      endpoint = 'https://openrouter.ai/api/v1',
+      provider = 'openai',
+    },
+    web_search_engine = {
+      provider = 'tavily',
+    },
   },
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
   build = 'make',

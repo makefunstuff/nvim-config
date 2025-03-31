@@ -97,7 +97,10 @@ return {
 
       local servers = {
         clangd = {},
-        gopls = {},
+        gopls = {
+          filetypes = { 'go', 'gomod' },
+          rootdir = require('lspconfig').util.root_pattern('go.work', 'go.mod', '.git'),
+        },
         pylsp = {
           cmd = { get_python_path(), '-m', 'pylsp' },
         },
@@ -131,6 +134,7 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'pylsp',
         'ols',
         'zls',
         'ts_ls',
