@@ -21,12 +21,10 @@ return {
     -- Main LSP Configuration
     'neovim/nvim-lspconfig',
     dependencies = {
-      -- Automatically install LSPs and related tools to stdpath for Neovim
-      { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
+      { 'williamboman/mason.nvim', config = true },
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
       'hrsh7th/nvim-cmp',
-      -- Useful status updates for LSP.
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim', opts = {} },
 
@@ -83,6 +81,9 @@ return {
         end,
       })
 
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
+
       local servers = {
         clangd = {
           capabilities = {},
@@ -113,15 +114,10 @@ return {
         },
       }
 
-      for server, config in pairs(servers) do
-        config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
-        require('lspconfig')[server].setup(config)
-      end
-
       require('mason').setup()
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
-        'stylua', -- Used to format Lua code
+        'stylua',
         'pylsp',
         'ts_ls',
         'gopls',
