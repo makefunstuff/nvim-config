@@ -43,50 +43,6 @@ return {
     end,
   },
   {
-    'slugbyte/lackluster.nvim',
-    config = function()
-      lackluster = require 'lackluster'
-
-      lackluster.setup {
-        tweak_color = {
-          lack = 'default',
-          luster = 'default',
-          orange = 'default',
-          yellow = 'default',
-          green = 'default',
-          blue = 'default',
-          red = 'default',
-          gray1 = 'default',
-          gray2 = 'default',
-          gray3 = 'default',
-          gray4 = 'default',
-          gray5 = 'default',
-          gray6 = 'default',
-          gray7 = 'default',
-          gray8 = 'default',
-          gray9 = 'default',
-        },
-        tweak_syntax = {
-          comment = '#686756',
-          string = 'default',
-          string_escape = 'default',
-          builtin = 'default',
-          type = 'default',
-          keyword = 'default',
-          keyword_return = 'default',
-          keyword_exception = 'default',
-        },
-        disable_plugin = {
-          todo_comments = true,
-        },
-        tweak_background = {
-          normal = '#0C0C0C',
-        },
-      }
-      vim.cmd.colorscheme 'lackluster-mint'
-    end,
-  },
-  {
     'aktersnurra/no-clown-fiesta.nvim',
   },
   {
@@ -361,14 +317,11 @@ return {
     },
   },
 
-  require 'plugins.lsp',
-  require 'plugins.autopairs',
   require 'plugins.cmp',
+  require 'plugins.lsp',
   require 'plugins.conform',
   require 'plugins.debug',
   require 'plugins.gitsigns',
   require 'plugins.treesitter-text-objects',
-  require 'plugins.ai',
-  require 'plugins.mcp',
   require 'plugins.avante',
 }

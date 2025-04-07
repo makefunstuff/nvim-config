@@ -29,14 +29,15 @@ require('lazy').setup({
 
 require('focus').setup()
 
--- Filetype detection for .fs and .vs files
+-- -- Filetype detection for .fs and .vs files
 vim.cmd [[
   autocmd BufRead,BufNewFile *.fs set filetype=glsl
   autocmd BufRead,BufNewFile *.vs set filetype=glsl
   autocmd BufRead,BufNewFile *.hlsl set filetype=hlsl
   autocmd BufRead,BufNewFile *.fx set filetype=hlsl
-  colorscheme "default"
 ]]
+
+vim.cmd("colorscheme deep-space")
 
 local project_config = vim.fn.getcwd() .. '.project.lua'
 if vim.fn.filereadable(project_config) == 1 then

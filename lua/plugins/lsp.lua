@@ -7,8 +7,6 @@ end
 
 return {
   {
-    -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
-    -- used for completion, annotations and signatures of Neovim apis
     'folke/lazydev.nvim',
     ft = 'lua',
     opts = {
@@ -27,12 +25,11 @@ return {
       { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-
+      'hrsh7th/nvim-cmp',
       -- Useful status updates for LSP.
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim', opts = {} },
 
-      -- Allows extra capabilities provided by nvim-cmp
       'saghen/blink.cmp',
     },
     config = function()
@@ -54,11 +51,6 @@ return {
           map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
-          -- The following two autocommands are used to highlight references of the
-          -- word under your cursor when your cursor rests there for a little while.
-          --    See `:help CursorHold` for information about when this is executed
-          --
-          -- When you move your cursor, the highlights will be cleared (the second autocommand).
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
             local highlight_augroup = vim.api.nvim_create_augroup('custom-lsp-highlight', { clear = false })
@@ -83,10 +75,6 @@ return {
             })
           end
 
-          -- The following code creates a keymap to toggle inlay hints in your
-          -- code, if the language server you are using supports them
-          --
-          -- This may be unwanted, since they displace some of your code
           if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
             map('<leader>th', function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
@@ -96,38 +84,38 @@ return {
       })
 
       local servers = {
-        clangd = {},
+        clangd = {
+          capabilities = {},
+        },
         gopls = {
+          capabilities = {},
           filetypes = { 'go', 'gomod' },
           rootdir = require('lspconfig').util.root_pattern('go.work', 'go.mod', '.git'),
         },
         pylsp = {
           cmd = { get_python_path(), '-m', 'pylsp' },
+          capabilities = {},
         },
-        ols = {},
-        zls = {},
-        ts_ls = {},
+        ts_ls = {
+          capabilities = {},
+        },
 
         lua_ls = {
-          -- cmd = {...},
-          -- filetypes = { ...},
-          -- capabilities = {},
+          capabilities = {},
           settings = {
             Lua = {
               completion = {
                 callSnippet = 'Replace',
               },
-              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
               diagnostics = { disable = { 'missing-fields' } },
             },
           },
         },
       }
 
-      local lspconfig = require 'lspconfig'
       for server, config in pairs(servers) do
         config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
-        lspconfig[server].setup(config)
+        require('lspconfig')[server].setup(config)
       end
 
       require('mason').setup()
@@ -135,8 +123,6 @@ return {
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
         'pylsp',
-        'ols',
-        'zls',
         'ts_ls',
         'gopls',
         'clangd',
@@ -147,9 +133,6 @@ return {
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
-            -- This handles overriding only values explicitly passed
-            -- by the server configuration above. Useful when disabling
-            -- certain features of an LSP (for example, turning off formatting for tsserver)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
             require('lspconfig')[server_name].setup(server)
           end,

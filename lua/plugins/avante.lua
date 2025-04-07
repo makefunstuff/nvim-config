@@ -8,7 +8,7 @@ return {
     provider = 'openai',
     openai = {
       endpoint = 'https://openrouter.ai/api/v1',
-      model = 'google/gemini-2.0-flash-lite-001',
+      model = 'openrouter/quasar-alpha',
       timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
       temperature = 0,
       max_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
@@ -35,10 +35,8 @@ return {
     --- The below dependencies are optional,
     'echasnovski/mini.pick', -- for file_selector provider mini.pick
     'nvim-telescope/telescope.nvim', -- for file_selector provider telescope
-    'hrsh7th/nvim-cmp', -- autocompletion for avante commands and mentions
     'ibhagwan/fzf-lua', -- for file_selector provider fzf
     'nvim-tree/nvim-web-devicons', -- or echasnovski/mini.icons
-    'zbirenbaum/copilot.lua', -- for providers='copilot'
     {
       -- support for image pasting
       'HakonHarnes/img-clip.nvim',
