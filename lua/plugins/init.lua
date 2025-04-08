@@ -334,6 +334,7 @@ return {
 
   require 'plugins.cmp',
   require 'plugins.lsp',
+  require 'plugins.autopairs',
   require 'plugins.conform',
   require 'plugins.debug',
   require 'plugins.gitsigns',
