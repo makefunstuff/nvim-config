@@ -86,24 +86,18 @@ return {
 
       local servers = {
         ruby_lsp = {},
-        clangd = {
-          capabilities = {},
-        },
+        arduino_language_server = {},
+        clangd = {},
         gopls = {
-          capabilities = {},
           filetypes = { 'go', 'gomod' },
           rootdir = require('lspconfig').util.root_pattern('go.work', 'go.mod', '.git'),
         },
         pylsp = {
           cmd = { get_python_path(), '-m', 'pylsp' },
-          capabilities = {},
         },
-        ts_ls = {
-          capabilities = {},
-        },
+        ts_ls = {},
 
         lua_ls = {
-          capabilities = {},
           settings = {
             Lua = {
               completion = {
@@ -122,6 +116,7 @@ return {
         'pylsp',
         'ts_ls',
         'gopls',
+        'arduino_language_server',
         'clangd',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
