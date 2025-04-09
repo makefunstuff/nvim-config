@@ -85,6 +85,7 @@ return {
       capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
 
       local servers = {
+        ruby_lsp = {},
         clangd = {
           capabilities = {},
         },
