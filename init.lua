@@ -37,7 +37,7 @@ vim.cmd [[
   autocmd BufRead,BufNewFile *.fx set filetype=hlsl
 ]]
 
-vim.cmd 'colorscheme deep-space'
+vim.cmd 'colorscheme iceberg'
 
 local project_config = vim.fn.getcwd() .. '.project.lua'
 if vim.fn.filereadable(project_config) == 1 then
