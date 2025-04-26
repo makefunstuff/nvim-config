@@ -259,7 +259,19 @@ return {
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'c3', 'odin', 'zig' },
+      parser_install_info = {
+        c3 = {
+          install_info = {
+            url = 'https://github.com/c3lang/tree-sitter-c3',
+            files = { 'src/parser.c', 'src/scanner.c' },
+            branch = 'main',
+          },
+          sync_install = false, -- Set to true if you want to install synchronously
+          auto_install = true, -- Automatically install when opening a file
+          filetype = 'c3', -- if filetype does not match the parser name
+        },
+      },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {

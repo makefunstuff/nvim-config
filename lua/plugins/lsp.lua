@@ -88,6 +88,8 @@ return {
         ruby_lsp = {},
         arduino_language_server = {},
         clangd = {},
+        ["c3-lsp"] = {},
+        ols = {},
         gopls = {
           filetypes = { 'go', 'gomod' },
           rootdir = require('lspconfig').util.root_pattern('go.work', 'go.mod', '.git'),
@@ -118,6 +120,8 @@ return {
         'gopls',
         'arduino_language_server',
         'clangd',
+        'c3-lsp',
+        'ols',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
