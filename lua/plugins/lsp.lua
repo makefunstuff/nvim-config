@@ -88,7 +88,6 @@ return {
         ruby_lsp = {},
         arduino_language_server = {},
         clangd = {},
-        ["c3-lsp"] = {},
         ols = {},
         gopls = {
           filetypes = { 'go', 'gomod' },
@@ -99,6 +98,14 @@ return {
         },
         ts_ls = {},
 
+        ['c3-lsp'] = {
+          settings = {
+            name = 'c3_lsp',
+            enable = true,
+            filetypes = { 'c3' },
+            rootdir = require('lspconfig').util.root_pattern('project.json', '.git'),
+          },
+        },
         lua_ls = {
           settings = {
             Lua = {
@@ -134,6 +141,8 @@ return {
           end,
         },
       }
+      vim.lsp.enable 'c3_lsp'
+      vim.lsp.enable 'ols'
     end,
   },
 }

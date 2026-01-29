@@ -37,7 +37,7 @@ vim.cmd [[
   autocmd BufRead,BufNewFile *.fx set filetype=hlsl
 ]]
 
-vim.cmd 'colorscheme iceberg'
+vim.cmd 'colorscheme ayu'
 
 local project_config = vim.fn.getcwd() .. '.project.lua'
 if vim.fn.filereadable(project_config) == 1 then
@@ -71,3 +71,8 @@ parser_config.c3 = {
     branch = 'main',
   },
 }
+
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.opt.softtabstop = 4
