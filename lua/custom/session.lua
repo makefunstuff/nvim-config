@@ -9,7 +9,7 @@ vim.api.nvim_create_autocmd({ 'VimLeave' }, {
   end,
 })
 
--- Auto restore session on start
+-- Auto load session on enter
 vim.api.nvim_create_autocmd({ 'VimEnter' }, {
   callback = function()
     if vim.fn.filereadable(session_file) == 1 then
