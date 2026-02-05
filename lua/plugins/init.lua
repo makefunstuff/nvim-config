@@ -331,6 +331,7 @@ return {
     },
   },
 
+  require 'plugins.opencode',
   require 'plugins.cmp',
   require 'plugins.lsp',
   require 'plugins.autopairs',
@@ -339,5 +340,4 @@ return {
   require 'plugins.gitsigns',
   require 'plugins.indent_line',
   require 'plugins.treesitter-text-objects',
-  require 'plugins.avante',
 }
