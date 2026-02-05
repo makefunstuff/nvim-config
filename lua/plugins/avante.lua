@@ -4,23 +4,30 @@ return {
   event = 'VeryLazy',
   version = false, -- Never set this value to "*"! Never!
   opts = {
-    provider = 'claude',
-    auto_suggestions_provider = 'claude',
+    provider = 'opencode',
+    auto_suggestions_provider = 'copilot',
     providers = {
-      -- Primary provider: Claude (via Claude Max subscription)
-      claude = {
-        endpoint = 'https://api.anthropic.com',
-        model = 'claude-sonnet-4-20250514',
+      -- Primary provider: GitHub Copilot (uses ChatGPT Plus models)
+      copilot = {
+        model = 'gpt-4o',
         timeout = 30000,
-        auth_type = 'max',
+        extra_request_body = {
+          temperature = 0,
+          max_tokens = 8192,
+        },
       },
       -- Secondary provider: OpenRouter
       openrouter = {
         __inherited_from = 'openai',
         endpoint = 'https://openrouter.ai/api/v1',
-        model = 'openrouter/auto',
+        model = 'openai/gpt-4o',
         timeout = 30000,
+        extra_request_body = {
+          temperature = 0,
+          max_tokens = 8192,
+        },
       },
+      -- Backup provider: Local Ollama
       ollama = {
         endpoint = 'http://127.0.0.1:11434/v1',
         model = 'qwen2.5-coder:7b-instruct',
@@ -28,6 +35,16 @@ return {
         extra_request_body = {
           temperature = 0,
           max_tokens = 4096,
+        },
+      },
+    },
+    acp_providers = {
+      opencode = {
+        command = 'opencode',
+        args = { 'acp' },
+        env = {
+          OPENROUTER_API_KEY = os.getenv 'OPENROUTER_API_KEY',
+          OPENAI_API_KEY = os.getenv 'OPENAI_API_KEY',
         },
       },
     },

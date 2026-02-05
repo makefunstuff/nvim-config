@@ -3,6 +3,21 @@ require 'config.options'
 require 'config.autocommands'
 require 'config.lazy'
 
+-- Ensure vim.lsp.config['*'] exists for plugins expecting defaults (e.g. blink.cmp)
+vim.lsp = vim.lsp or {}
+vim.lsp.config = vim.lsp.config or {}
+if not vim.lsp.config['*'] then
+  vim.lsp.config['*'] = {}
+end
+if vim.lsp.config['*'].capabilities == nil then
+  local ok, protocol = pcall(function() return vim.lsp.protocol end)
+  if ok and protocol and protocol.make_client_capabilities then
+    vim.lsp.config['*'].capabilities = protocol.make_client_capabilities()
+  else
+    vim.lsp.config['*'].capabilities = {}
+  end
+end
+
 require('lazy').setup({
   require 'plugins',
 }, {
