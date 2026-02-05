@@ -1,18 +1,6 @@
 return {
   { 'nvim-focus/focus.nvim', version = false },
   'tpope/vim-sleuth',
-  { -- Adds git related signs to the gutter, as well as utilities for managing changes
-    'lewis6991/gitsigns.nvim',
-    opts = {
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
-    },
-  },
   {
     'nvim-orgmode/orgmode',
     event = 'VeryLazy',
@@ -28,10 +16,6 @@ return {
             description = 'Journal',
             template = '\n*** %<%Y-%m-%d> %<%A>\n**** %U\n\n%?',
             target = '~/sync/org/journal.org',
-          },
-          n = {
-            description = 'Note',
-            target = '~/org/journal.org',
           },
           n = {
             description = 'Note',
@@ -181,7 +165,7 @@ return {
   },
   {
     'folke/todo-comments.nvim',
-    event = 'vimenter',
+    event = 'VimEnter',
     dependencies = { 'nvim-lua/plenary.nvim' },
     opts = {
       keywords = {
@@ -353,6 +337,7 @@ return {
   require 'plugins.conform',
   require 'plugins.debug',
   require 'plugins.gitsigns',
+  require 'plugins.indent_line',
   require 'plugins.treesitter-text-objects',
   require 'plugins.avante',
 }

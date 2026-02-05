@@ -16,7 +16,7 @@ map('n', '<C-s>', '<cmd>w<CR>', { desc = 'General Save file' })
 map('n', '<C-c>', '<cmd>%y+<CR>', { desc = 'General Copy whole file' })
 
 map('n', '<leader>n', '<cmd>set nu!<CR>', { desc = 'Toggle line number' })
-map('n', '<leader>rn', '<cmd>set rnu!<CR>', { desc = 'Toggle relative number' })
+map('n', '<leader>ur', '<cmd>set rnu!<CR>', { desc = 'Toggle relative number' })
 map('n', '<leader>ch', '<cmd>NvCheatsheet<CR>', { desc = 'Toggle nvcheatsheet' })
 
 map('n', '<leader>fm', function()
@@ -24,11 +24,11 @@ map('n', '<leader>fm', function()
 end, { desc = 'General Format file' })
 
 -- global lsp mappings
-map('n', '<leader>ds', vim.diagnostic.setloclist, { desc = 'LSP Diagnostic loclist' })
+map('n', '<leader>dl', vim.diagnostic.setloclist, { desc = 'LSP Diagnostic loclist' })
 
 -- Comment
-map('n', '<leader>/', 'gcc', { desc = 'Toggle Comment', remap = true })
-map('v', '<leader>/', 'gc', { desc = 'Toggle comment', remap = true })
+map('n', '<leader>cc', 'gcc', { desc = 'Toggle Comment', remap = true })
+map('v', '<leader>cc', 'gc', { desc = 'Toggle comment', remap = true })
 
 -- netwrw
 map('n', '<C-n>', '<cmd>e .<CR>', { desc = 'Open netrw' })

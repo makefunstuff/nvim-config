@@ -36,7 +36,7 @@ return {
         css = { 'prettier' },
         html = { 'prettier' },
         go = { 'goimports', 'gofumpt' },
-        typescript = { 'prettier', 'prettierd ' },
+        typescript = { 'prettier', 'prettierd' },
         javascript = { 'prettier', 'prettierd' },
         rust = { 'rustfmt' },
         odin = { 'ols' },

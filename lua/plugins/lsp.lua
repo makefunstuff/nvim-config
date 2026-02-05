@@ -91,20 +91,16 @@ return {
         ols = {},
         gopls = {
           filetypes = { 'go', 'gomod' },
-          rootdir = require('lspconfig').util.root_pattern('go.work', 'go.mod', '.git'),
+          root_dir = require('lspconfig').util.root_pattern('go.work', 'go.mod', '.git'),
         },
         pylsp = {
           cmd = { get_python_path(), '-m', 'pylsp' },
         },
         ts_ls = {},
 
-        ['c3-lsp'] = {
-          settings = {
-            name = 'c3_lsp',
-            enable = true,
-            filetypes = { 'c3' },
-            rootdir = require('lspconfig').util.root_pattern('project.json', '.git'),
-          },
+        c3_lsp = {
+          filetypes = { 'c3', 'c3i', 'c3t' },
+          root_dir = require('lspconfig').util.root_pattern('project.json', '.git'),
         },
         lua_ls = {
           settings = {
@@ -120,6 +116,9 @@ return {
 
       require('mason').setup()
       local ensure_installed = vim.tbl_keys(servers or {})
+      ensure_installed = vim.tbl_filter(function(name)
+        return name ~= 'c3_lsp'
+      end, ensure_installed)
       vim.list_extend(ensure_installed, {
         'stylua',
         'pylsp',
@@ -141,8 +140,6 @@ return {
           end,
         },
       }
-      vim.lsp.enable 'c3_lsp'
-      vim.lsp.enable 'ols'
     end,
   },
 }

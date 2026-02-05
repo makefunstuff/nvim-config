@@ -54,7 +54,7 @@ vim.cmd [[
 
 vim.cmd 'colorscheme ayu'
 
-local project_config = vim.fn.getcwd() .. '.project.lua'
+local project_config = vim.fn.getcwd() .. '/.project.lua'
 if vim.fn.filereadable(project_config) == 1 then
   dofile(project_config)
 end
@@ -66,8 +66,18 @@ if vim.fn.has 'win32' == 1 or vim.fn.has 'win64' == 1 then
 end
 
 vim.api.nvim_create_autocmd('BufWritePost', {
-  pattern = '~/.config/nvim/lua/plugins/*.lua',
-  command = "lua ReloadLuaFiles(vim.fn.expand('~/.config/nvim/lua/plugins'))",
+  pattern = '*.lua',
+  callback = function(args)
+    local config_dir = vim.fn.stdpath 'config'
+    local rel = args.file:match('^' .. vim.pesc(config_dir) .. '/lua/(.+)%.lua$')
+    if not rel then
+      return
+    end
+
+    local module = rel:gsub('/', '.')
+    package.loaded[module] = nil
+    pcall(require, module)
+  end,
 })
 
 vim.filetype.add {
