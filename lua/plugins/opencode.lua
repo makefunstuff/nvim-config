@@ -8,12 +8,21 @@ return {
     vim.g.opencode_opts.provider = { enabled = 'tmux' }
     vim.o.autoread = true
 
+    local opencode = require 'opencode'
+    local config = require 'opencode.config'
+
+    -- Override built-in tmux split with a floating popup provider
+    local popup = require('custom.opencode_popup').new {
+      width = '80%',
+      height = '80%',
+    }
+    popup.cmd = config.opts.provider.cmd or 'opencode --port'
+    config.provider = popup
+
     local function map(mode, l, r, opts)
       opts = opts or {}
       vim.keymap.set(mode, l, r, opts)
     end
-
-    local opencode = require 'opencode'
     map({ 'n', 'x' }, '<leader>oa', function()
       opencode.ask('@this: ', { submit = true })
     end, { desc = 'Ask opencode' })
