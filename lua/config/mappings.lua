@@ -17,10 +17,9 @@ map('n', '<C-c>', '<cmd>%y+<CR>', { desc = 'General Copy whole file' })
 
 map('n', '<leader>n', '<cmd>set nu!<CR>', { desc = 'Toggle line number' })
 map('n', '<leader>ur', '<cmd>set rnu!<CR>', { desc = 'Toggle relative number' })
-map('n', '<leader>ch', '<cmd>NvCheatsheet<CR>', { desc = 'Toggle nvcheatsheet' })
 
 map('n', '<leader>fm', function()
-  require('conform').format { lsp_fallback = true }
+  require('conform').format { lsp_format = 'fallback' }
 end, { desc = 'General Format file' })
 
 -- global lsp mappings
@@ -42,12 +41,8 @@ map('n', '<leader>fo', '<cmd>Telescope oldfiles<CR>', { desc = 'telescope find o
 map('n', '<leader>fz', '<cmd>Telescope current_buffer_fuzzy_find<CR>', { desc = 'telescope find in current buffer' })
 map('n', '<leader>cm', '<cmd>Telescope git_commits<CR>', { desc = 'telescope git commits' })
 map('n', '<leader>gt', '<cmd>Telescope git_status<CR>', { desc = 'telescope git status' })
-map('n', '<leader>pt', '<cmd>Telescope terms<CR>', { desc = 'telescope pick hidden term' })
 map('n', '<leader>ff', '<cmd>Telescope find_files<cr>', { desc = 'telescope find files' })
 map('n', '<leader>fa', '<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>', { desc = 'telescope find all files' })
-
-map('n', '<leader>fcc', '<cmd>CodeCompanionChat<cr>', { desc = 'code companion chat' })
-map('n', '<leader>fcp', '<cmd>CodeCompanion<cr>', { desc = 'telescope find files' })
 
 -- terminal
 map('t', '<C-x>', '<C-\\><C-N>', { desc = 'terminal escape terminal mode' })
@@ -65,13 +60,13 @@ map('i', 'jk', '<ESC>')
 map('n', '<leader>tt', '<cmd>Telescope<CR>', { desc = 'Open Telescope' })
 map('n', '<leader>tg', '<cmd>Telescope git_files<CR>', { desc = 'Telescope git files search' })
 
-map('n', '<C-p>', '<cmd> Telescope find_files<CR>', { desc = 'Telescope git files search' })
+map('n', '<C-p>', '<cmd>Telescope find_files<CR>', { desc = 'Telescope find files' })
 
 map('n', '<leader>db', '<cmd>DapToggleBreakpoint<CR>', { desc = 'Toggle breakpoint' })
 map('n', '<leader>dr', '<cmd> DapContinue<CR>', { desc = 'Start or continue debugger' })
 
 map('n', '<Esc>', '<cmd>nohlsearch<CR>')
-map('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+map('n', '<leader>q', vim.diagnostic.setqflist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 --- compile
 map('n', '<leader>mb', '<cmd>make<CR>', { desc = 'Compile project' })

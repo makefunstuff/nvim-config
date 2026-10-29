@@ -2,10 +2,5 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-vim.g.have_nerd_font = false
-
-vim.diagnostic.config {
-  virtual_text = false,
-  signs = false,
-  underline = false,
-}
+-- Ghostty ships the Nerd Font symbols as a fallback, so icons render with any font.
+vim.g.have_nerd_font = true

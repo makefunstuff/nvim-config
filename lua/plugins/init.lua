@@ -1,123 +1,118 @@
+local treesitter_parsers = {
+  'bash',
+  'c',
+  'c3',
+  'diff',
+  'dockerfile',
+  'go',
+  'html',
+  'javascript',
+  'json',
+  'lua',
+  'luadoc',
+  'markdown',
+  'markdown_inline',
+  'odin',
+  'python',
+  'query',
+  'rust',
+  'toml',
+  'typescript',
+  'vim',
+  'vimdoc',
+  'yaml',
+  'zig',
+}
+
 return {
-  { 'nvim-focus/focus.nvim', version = false },
+  { 'ChmaraX/herdr-nvim', opts = {} },
+  { 'nvim-focus/focus.nvim', version = false, opts = {} },
   'tpope/vim-sleuth',
   {
-    'nvim-orgmode/orgmode',
-    event = 'VeryLazy',
-    ft = { 'org' },
-    config = function()
-      -- Setup orgmode
-      require('orgmode').setup {
-        org_agenda_files = '~/org/**/*',
-        org_default_notes_file = '~/org/notes.org',
-        org_todo_keywords = { 'TODO', 'CANCELLED', 'DONE' },
-        org_capture_templates = {
-          j = {
-            description = 'Journal',
-            template = '\n*** %<%Y-%m-%d> %<%A>\n**** %U\n\n%?',
-            target = '~/sync/org/journal.org',
-          },
-          n = {
-            description = 'Note',
-            template = '* %(return vim.fn.getreg "w")',
-            target = '~/org/notes.org',
-          },
-        },
-      }
-    end,
-  },
-  {
-    'nvim-orgmode/telescope-orgmode.nvim',
-    event = 'VeryLazy',
-    dependencies = {
-      'nvim-orgmode/orgmode',
-      'nvim-telescope/telescope.nvim',
-    },
-    config = function()
-      require('telescope').load_extension 'orgmode'
-
-      vim.keymap.set('n', '<leader>rr', require('telescope').extensions.orgmode.refile_heading)
-      vim.keymap.set('n', '<leader>of', require('telescope').extensions.orgmode.search_headings)
-      vim.keymap.set('n', '<leader>li', require('telescope').extensions.orgmode.insert_link)
-    end,
-  },
-  {
-    'raphael-proust/vacme',
-  },
-  {
-    'aktersnurra/no-clown-fiesta.nvim',
-  },
-  {
-    'rafi/awesome-vim-colorschemes',
-  },
-  { -- Useful plugin to show you pending keybinds.
-    'folke/which-key.nvim',
-    event = 'VimEnter', -- Sets the loading event to 'VimEnter'
+    'obsidian-nvim/obsidian.nvim',
+    version = '*', -- use latest release, remove to use latest commit
+    ---@module 'obsidian'
+    ---@type obsidian.config
     opts = {
-      icons = {
-        -- set icon mappings to true if you have a Nerd Font
-        mappings = vim.g.have_nerd_font,
-        -- If you are using a Nerd Font: set icons.keys to an empty table which will use the
-        -- default whick-key.nvim defined Nerd Font icons, otherwise define a string table
-        keys = vim.g.have_nerd_font and {} or {
-          Up = '<Up> ',
-          Down = '<Down> ',
-          Left = '<Left> ',
-          Right = '<Right> ',
-          C = '<C-…> ',
-          M = '<M-…> ',
-          D = '<D-…> ',
-          S = '<S-…> ',
-          CR = '<CR> ',
-          Esc = '<Esc> ',
-          ScrollWheelDown = '<ScrollWheelDown> ',
-          ScrollWheelUp = '<ScrollWheelUp> ',
-          NL = '<NL> ',
-          BS = '<BS> ',
-          Space = '<Space> ',
-          Tab = '<Tab> ',
-          F1 = '<F1>',
-          F2 = '<F2>',
-          F3 = '<F3>',
-          F4 = '<F4>',
-          F5 = '<F5>',
-          F6 = '<F6>',
-          F7 = '<F7>',
-          F8 = '<F8>',
-          F9 = '<F9>',
-          F10 = '<F10>',
-          F11 = '<F11>',
-          F12 = '<F12>',
+      legacy_commands = false, -- this will be removed in 4.0.0
+      workspaces = {
+        {
+          name = 'personal',
+          path = '~/Documents/personal-kb/',
+        },
+        {
+          name = 'education',
+          path = '~/Education/vault/',
         },
       },
     },
   },
+
+  { -- Colorscheme
+    'Shatur/neovim-ayu',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      local colors = require 'ayu.colors'
+      colors.generate()
+      require('ayu').setup {
+        overrides = {
+          FloatBorder = { fg = colors.comment, bg = 'none' },
+          NormalFloat = { bg = 'none' },
+          WinSeparator = { fg = colors.guide_normal },
+          CursorLineNr = { fg = colors.accent, bold = true },
+        },
+      }
+      vim.cmd.colorscheme 'ayu-dark'
+    end,
+  },
+
+  { -- Useful plugin to show you pending keybinds.
+    'folke/which-key.nvim',
+    event = 'VimEnter',
+    opts = {
+      preset = 'helix',
+      icons = { mappings = vim.g.have_nerd_font },
+      spec = {
+        { '<leader>d', group = 'debug / diagnostics' },
+        { '<leader>f', group = 'find' },
+        { '<leader>h', group = 'git hunk', mode = { 'n', 'v' } },
+        { '<leader>s', group = 'search' },
+        { '<leader>t', group = 'toggle / trouble' },
+        { '<leader>w', group = 'workspace / whichkey' },
+      },
+    },
+  },
+
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
     branch = 'master',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      { -- If encountering errors, see telescope-fzf-native README for installation instructions
+      {
         'nvim-telescope/telescope-fzf-native.nvim',
-
-        -- `build` is used to run some command when the plugin is installed/updated.
-        -- This is only run then, not every time Neovim starts up.
         build = 'make',
-
-        -- `cond` is a condition used to determine whether this plugin should be
-        -- installed and loaded.
         cond = function()
           return vim.fn.executable 'make' == 1
         end,
       },
       { 'nvim-telescope/telescope-ui-select.nvim' },
-
-      -- Useful for getting pretty icons, but requires a Nerd Font.
-      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
     config = function()
       require('telescope').setup {
+        defaults = {
+          prompt_prefix = '   ',
+          selection_caret = ' ',
+          entry_prefix = '  ',
+          sorting_strategy = 'ascending',
+          layout_config = {
+            horizontal = { prompt_position = 'top', preview_width = 0.55 },
+            width = 0.87,
+            height = 0.8,
+          },
+          borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
@@ -125,11 +120,9 @@ return {
         },
       }
 
-      -- Enable Telescope extensions if they are installed
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
 
-      -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
@@ -142,7 +135,6 @@ return {
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
-      -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
         builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
           winblend = 10,
@@ -157,27 +149,21 @@ return {
         }
       end, { desc = '[S]earch [/] in Open Files' })
 
-      -- Shortcut for searching your Neovim configuration files
       vim.keymap.set('n', '<leader>sn', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
     end,
   },
+
   {
     'folke/todo-comments.nvim',
     event = 'VimEnter',
     dependencies = { 'nvim-lua/plenary.nvim' },
     opts = {
       keywords = {
-        TODO = {
-          color = '#2aa330',
-        },
-        WARN = {
-          color = '#af3139',
-        },
-        NOTE = {
-          color = '#894a7a',
-        },
+        TODO = { color = '#2aa330' },
+        WARN = { color = '#af3139' },
+        NOTE = { color = '#894a7a' },
       },
       gui_style = {
         fg = 'BOLD',
@@ -189,67 +175,111 @@ return {
         pattern = [[.*<(KEYWORDS)\s*]],
       },
       signs = false,
-    },
-
-    search = {
-      command = 'rg',
-      args = {
-        '--color=never',
-        '--no-heading',
-        '--with-filename',
-        '--line-number',
-        '--column',
+      search = {
+        command = 'rg',
+        args = {
+          '--color=never',
+          '--no-heading',
+          '--with-filename',
+          '--line-number',
+          '--column',
+        },
+        pattern = [[.*<(KEYWORDS)\(\w*\)\s*]],
       },
-      pattern = [[.*<(KEYWORDS)\(\w*\)\s*]],
     },
   },
+
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
+    lazy = false,
+    priority = 900,
     config = function()
-      -- Better Around/Inside textobjects
-      --
-      -- Examples:
-      --  - va)  - [V]isually select [A]round [)]paren
-      --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
-      --  - ci'  - [C]hange [I]nside [']quote
+      -- Icons, also standing in for nvim-web-devicons (telescope, trouble, ...)
+      require('mini.icons').setup()
+      MiniIcons.mock_nvim_web_devicons()
+
+      -- Better Around/Inside textobjects (va), yinq, ci')
       require('mini.ai').setup { n_lines = 500 }
 
-      -- Add/delete/replace surroundings (brackets, quotes, etc.)
-      --
-      -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
-      -- - sd'   - [S]urround [D]elete [']quotes
-      -- - sr)'  - [S]urround [R]eplace [)] [']
+      -- Add/delete/replace surroundings (saiw), sd', sr)')
       require('mini.surround').setup()
 
-      -- Simple and easy statusline.
-      --  You could remove this setup call if you don't like it,
-      --  and try some other statusline plugin
+      -- Colour hex codes like #ffaa00 in place
+      local hipatterns = require 'mini.hipatterns'
+      hipatterns.setup {
+        highlighters = { hex_color = hipatterns.gen_highlighter.hex_color() },
+      }
+
+      -- Start screen when Neovim opens without a file
+      local starter = require 'mini.starter'
+      starter.setup {
+        evaluate_single = true,
+        items = {
+          starter.sections.recent_files(6, true, false),
+          starter.sections.builtin_actions(),
+        },
+        content_hooks = {
+          starter.gen_hook.adding_bullet '  ',
+          starter.gen_hook.aligning('center', 'center'),
+        },
+      }
+
       local statusline = require 'mini.statusline'
-      -- set use_icons to true if you have a Nerd Font
-      statusline.setup { use_icons = vim.g.have_nerd_font }
+      statusline.setup {
+        use_icons = vim.g.have_nerd_font,
+        content = {
+          active = function()
+            local mode, mode_hl = statusline.section_mode { trunc_width = 120 }
+            local git = statusline.section_git { trunc_width = 40 }
+            local diff = statusline.section_diff { trunc_width = 75 }
+            local diagnostics = statusline.section_diagnostics { trunc_width = 75 }
+            local lsp = statusline.section_lsp { trunc_width = 75 }
+            local filename = statusline.section_filename { trunc_width = 140 }
+            local fileinfo = statusline.section_fileinfo { trunc_width = 120 }
 
-      -- You can configure sections in the statusline by overriding their
-      -- default behavior. For example, here we set the section for
-      -- cursor location to LINE:COLUMN
-      ---@diagnostic disable-next-line: duplicate-set-field
-      statusline.section_location = function()
-        return '%2l:%-2v'
-      end
+            local ok, pair = pcall(require, 'pair')
+            local pair_status = ok and pair.status():gsub('%%', '%%%%') or ''
 
-      -- ... and there is more!
-      --  Check out: https://github.com/echasnovski/mini.nvim
+            return statusline.combine_groups {
+              { hl = mode_hl, strings = { mode } },
+              { hl = 'MiniStatuslineDevinfo', strings = { git, diff, diagnostics, lsp } },
+              '%<',
+              { hl = 'MiniStatuslineFilename', strings = { filename } },
+              '%=',
+              { hl = 'MiniStatuslineFilename', strings = { pair_status } },
+              { hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
+              { hl = mode_hl, strings = { '%2l:%-2v' } },
+            }
+          end,
+        },
+      }
     end,
   },
+
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    lazy = false,
     build = ':TSUpdate',
     config = function()
-      require('nvim-treesitter').setup {
-        ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'c3', 'odin', 'zig' },
-        auto_install = true,
-        highlight = { enable = true },
-        indent = { enable = true },
-      }
+      local treesitter = require 'nvim-treesitter'
+      treesitter.setup()
+      treesitter.install(treesitter_parsers)
+
+      vim.api.nvim_create_autocmd('FileType', {
+        group = vim.api.nvim_create_augroup('custom-treesitter', { clear = true }),
+        callback = function(event)
+          if not pcall(vim.treesitter.start, event.buf) then
+            return
+          end
+
+          local filetype = vim.bo[event.buf].filetype
+          local language = vim.treesitter.language.get_lang(filetype) or filetype
+          local has_indents, query = pcall(vim.treesitter.query.get, language, 'indents')
+          if has_indents and query then
+            vim.bo[event.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+          end
+        end,
+      })
     end,
   },
   {
@@ -266,47 +296,23 @@ return {
   {
     'tpope/vim-fugitive',
     event = 'BufReadPost',
-    config = function() end,
+    cmd = { 'Git', 'G' },
   },
   {
     'folke/trouble.nvim',
-    opts = {}, -- for default options, refer to the configuration section for custom setup.
+    opts = {},
     cmd = 'Trouble',
     keys = {
-      {
-        '<leader>tx',
-        '<cmd>Trouble diagnostics toggle<cr>',
-        desc = 'Diagnostics (Trouble)',
-      },
-      {
-        '<leader>tX',
-        '<cmd>Trouble diagnostics toggle filter.buf=0<cr>',
-        desc = 'Buffer Diagnostics (Trouble)',
-      },
-      {
-        '<leader>ts',
-        '<cmd>Trouble symbols toggle focus=false<cr>',
-        desc = 'Symbols (Trouble)',
-      },
-      {
-        '<leader>tl',
-        '<cmd>Trouble lsp toggle focus=false win.position=right<cr>',
-        desc = 'LSP Definitions / references / ... (Trouble)',
-      },
-      {
-        '<leader>tL',
-        '<cmd>Trouble loclist toggle<cr>',
-        desc = 'Location List (Trouble)',
-      },
-      {
-        '<leader>tQ',
-        '<cmd>Trouble qflist toggle<cr>',
-        desc = 'Quickfix List (Trouble)',
-      },
+      { '<leader>tx', '<cmd>Trouble diagnostics toggle<cr>', desc = 'Diagnostics (Trouble)' },
+      { '<leader>tX', '<cmd>Trouble diagnostics toggle filter.buf=0<cr>', desc = 'Buffer Diagnostics (Trouble)' },
+      { '<leader>ts', '<cmd>Trouble symbols toggle focus=false<cr>', desc = 'Symbols (Trouble)' },
+      { '<leader>tl', '<cmd>Trouble lsp toggle focus=false win.position=right<cr>', desc = 'LSP Definitions / references / ... (Trouble)' },
+      { '<leader>tL', '<cmd>Trouble loclist toggle<cr>', desc = 'Location List (Trouble)' },
+      { '<leader>tQ', '<cmd>Trouble qflist toggle<cr>', desc = 'Quickfix List (Trouble)' },
     },
   },
 
-  require 'plugins.opencode',
+  require 'plugins.pair',
   require 'plugins.cmp',
   require 'plugins.lsp',
   require 'plugins.autopairs',

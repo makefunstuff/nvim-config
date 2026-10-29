@@ -1,10 +1,3 @@
-local function get_python_path()
-  if vim.env.VIRTUAL_ENV then
-    return vim.env.VIRTUAL_ENV .. '/bin/python'
-  end
-  return 'python3'
-end
-
 return {
   {
     'folke/lazydev.nvim',
@@ -21,16 +14,38 @@ return {
     -- Main LSP Configuration
     'neovim/nvim-lspconfig',
     dependencies = {
-      { 'williamboman/mason.nvim', config = true },
-      'williamboman/mason-lspconfig.nvim',
+      { 'mason-org/mason.nvim', opts = {} },
+      'mason-org/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-      'hrsh7th/nvim-cmp',
-      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+      { -- LSP progress, and vim.notify in the corner
+        'j-hui/fidget.nvim',
+        opts = {
+          notification = {
+            override_vim_notify = true,
+            window = { winblend = 0, border = 'rounded' },
+          },
+        },
+      },
 
       'saghen/blink.cmp',
     },
     config = function()
+      local severity = vim.diagnostic.severity
+      vim.diagnostic.config {
+        severity_sort = true,
+        underline = { severity = severity.ERROR },
+        virtual_text = { spacing = 2, source = 'if_many', prefix = '●' },
+        float = { border = 'rounded', source = 'if_many' },
+        signs = vim.g.have_nerd_font and {
+          text = {
+            [severity.ERROR] = '󰅚 ',
+            [severity.WARN] = '󰀪 ',
+            [severity.INFO] = '󰋽 ',
+            [severity.HINT] = '󰌶 ',
+          },
+        } or {},
+      }
+
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
@@ -50,7 +65,7 @@ return {
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
-          if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+          if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
             local highlight_augroup = vim.api.nvim_create_augroup('custom-lsp-highlight', { clear = false })
             vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
               buffer = event.buf,
@@ -73,7 +88,7 @@ return {
             })
           end
 
-          if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+          if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
             map('<leader>th', function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
             end, '[T]oggle Inlay [H]ints')
@@ -89,18 +104,14 @@ return {
         arduino_language_server = {},
         clangd = {},
         ols = {},
-        gopls = {
-          filetypes = { 'go', 'gomod' },
-          root_dir = require('lspconfig').util.root_pattern('go.work', 'go.mod', '.git'),
-        },
-        pylsp = {
-          cmd = { get_python_path(), '-m', 'pylsp' },
-        },
+        gopls = {},
+        pylsp = {},
+        rust_analyzer = {},
         ts_ls = {},
 
         c3_lsp = {
           filetypes = { 'c3', 'c3i', 'c3t' },
-          root_dir = require('lspconfig').util.root_pattern('project.json', '.git'),
+          root_markers = { 'project.json', 'manifest.json', '.git' },
         },
         lua_ls = {
           settings = {
@@ -114,32 +125,24 @@ return {
         },
       }
 
-      require('mason').setup()
-      local ensure_installed = vim.tbl_keys(servers or {})
-      ensure_installed = vim.tbl_filter(function(name)
-        return name ~= 'c3_lsp'
-      end, ensure_installed)
-      vim.list_extend(ensure_installed, {
-        'stylua',
-        'pylsp',
-        'ts_ls',
-        'gopls',
-        'arduino_language_server',
-        'clangd',
-        'c3-lsp',
-        'ols',
-      })
-      require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-
-      require('mason-lspconfig').setup {
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
-          end,
+      require('mason-tool-installer').setup {
+        ensure_installed = {
+          'tree-sitter-cli',
+          'stylua',
         },
       }
+
+      local server_names = vim.tbl_keys(servers)
+      require('mason-lspconfig').setup {
+        ensure_installed = server_names,
+        automatic_enable = false,
+      }
+
+      for server_name, server in pairs(servers) do
+        server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+        vim.lsp.config(server_name, server)
+        vim.lsp.enable(server_name)
+      end
     end,
   },
 }
